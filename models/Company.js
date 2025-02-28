@@ -35,6 +35,7 @@ const CompanySchema = new mongoose.Schema({
     },
     telephonenumber: {
         type: String,
+        required:[true,'Please add company phonenumber']
     }
 },{
     toJSON:{virtuals:true},
