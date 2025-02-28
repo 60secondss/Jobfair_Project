@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//name address website description telephone
+
 const CompanySchema = new mongoose.Schema({
     name:{
         type: String,

@@ -1,5 +1,5 @@
 const express = require('express');
-const {getCompanies, getCompany, createCompany, updateCompany, deleteCompany}=require('../controllers/companies');
+const {getCompanies, getCompany, createCompany, updateCompany, deleteCompany, searchCompanies}=require('../controllers/companies');
 
 //Include other resource routers
 const interviewRouter = require('./interviews');

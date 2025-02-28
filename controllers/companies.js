@@ -22,7 +22,7 @@ exports.getCompanies = async (req, res, next) => {
     //create operators ($gt,$gte,etc)
     queryStr=queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match=>`$${match}`);
     //finding resource
-    query=Company.find(JSON.parse(queryStr)).populate('interviews');
+    query=Company.find(JSON.parse(queryStr));
 
     //select Fields
     if(req.query.select){
