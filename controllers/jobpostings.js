@@ -15,7 +15,7 @@ exports.getJobpostings = async (req, res) => {
 };*/
 
 // @desc    Get all job postings
-// @route   GET /api/jobpostings
+// @route   GET /api/v1/jobpostings
 // @access  Public
 exports.getJobpostings = async (req, res, next) => {
     let query;
@@ -58,7 +58,6 @@ exports.getJobpostings = async (req, res, next) => {
     const limit = parseInt(req.query.limit, 10) || 25;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-
     try {
         const total = await Jobposting.countDocuments();
         
@@ -97,7 +96,7 @@ exports.getJobpostings = async (req, res, next) => {
 
 
 // @desc    Get a single job posting by ID
-// @route   GET /api/jobpostings/:id
+// @route   GET /api/vi/jobpostings/:id
 // @access  Public
 exports.getJobposting = async (req, res) => {
     try {
@@ -112,7 +111,7 @@ exports.getJobposting = async (req, res) => {
 };
 
 // @desc    Create a new job posting
-// @route   POST /api/jobpostings/:companyId
+// @route   POST /api/v1/jobpostings/:companyId
 // @access  Private (Company required)
 exports.createJobposting = async (req, res) => {
     try {
@@ -128,7 +127,10 @@ exports.createJobposting = async (req, res) => {
         //Validation Jobtype
         const validJobTypes = ['Full-time', 'Part-time', 'Contract', 'Internship', 'Temporary'];
         if (!validJobTypes.includes(jobtype)) {
-            return res.status(422).json({ success: false, message: 'Invalid job type. There are only 4 options available: Full-time, Part-time, Contract, Internship, Temporary '});
+            return res.status(422).json({ 
+                success: false, 
+                message: 'Invalid job type. There are only 4 options available: Full-time, Part-time, Contract, Internship, Temporary '
+            });
         }
 
         // Create job posting
@@ -148,7 +150,7 @@ exports.createJobposting = async (req, res) => {
 };
 
 // @desc    Update a job posting
-// @route   PUT /api/jobpostings/:id
+// @route   PUT /api/v1/jobpostings/:id
 // @access  Private (Company required)
 exports.updateJobposting = async (req, res) => {
     try {
@@ -170,7 +172,7 @@ exports.updateJobposting = async (req, res) => {
 };
 
 // @desc    Delete a job posting
-// @route   DELETE /api/jobpostings/:id
+// @route   DELETE /api/v1/jobpostings/:id
 // @access  Private (Company required)
 exports.deleteJobposting = async (req, res) => {
     try {
@@ -185,3 +187,4 @@ exports.deleteJobposting = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server Error' });
     }
 };
+
