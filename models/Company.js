@@ -37,16 +37,16 @@ const CompanySchema = new mongoose.Schema({
         type: String,
         required:[true,'Please add company phonenumber']
     }
-},{
-    toJSON:{virtuals:true},
-    toObject:{virtuals:true}
 });
-
-CompanySchema.virtual('interviews',{
-    ref:'Interview',
-    localField:'_id',
-    foreignField:'company',
-    justOne:false
-});
+// ,{
+//     toJSON:{virtuals:true},
+//     toObject:{virtuals:true}
+// }
+// CompanySchema.virtual('interviews',{
+//     ref:'Interview',
+//     localField:'_id',
+//     foreignField:'company',
+//     justOne:false
+// });
 
 module.exports=mongoose.model('Company', CompanySchema);
