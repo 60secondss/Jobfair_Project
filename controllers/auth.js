@@ -69,6 +69,8 @@ exports.login = async (req, res, next) => {
 const sendTokenResponse = (user, statusCode, res) => {
     // Create token
     const token = user.getSignedJwtToken();
+    const name = user.name
+    const role = user.role
 
     const options = {
         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000),
@@ -83,7 +85,9 @@ const sendTokenResponse = (user, statusCode, res) => {
         .cookie('token', token, options)
         .json({
             success: true,
-            token
+            token,
+            name,
+            role
         });
 };
 

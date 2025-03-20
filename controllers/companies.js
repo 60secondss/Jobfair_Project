@@ -148,34 +148,6 @@ exports.deleteCompany = async (req, res, next) => {
 
 
 
-//--------------------------------------------------------------ADDITIONAL FUNCTIONS-----------------------------
-// @desc    Search companies by name
-// @route   GET /api/v1/companies/search
-// @access  Public
-exports.searchCompanies = async (req, res, next) => {
-    try {
-        const { name } = req.query;
-        if (!name) {
-            return res.status(400).json({ success: false, msg: "Please provide a company name" });
-        }
-
-        const companies = await Company.find({ name: { $regex: name, $options: "i" } });
-
-        if (companies.length === 0) {
-            // Suggest similar names if no exact match
-            const similarCompanies = await Company.find({ name: { $regex: `.*${name}.*`, $options: "i" } }).limit(5);
-            return res.status(404).json({
-                success: false,
-                msg: "No companies found. Did you mean one of these?",
-                suggestions: similarCompanies.map((c) => c.name)
-            });
-        }
-
-        res.status(200).json({ success: true, count: companies.length, data: companies });
-    } catch (err) {
-        res.status(500).json({ success: false, msg: "Server error" });
-    }
-};
 
 
 
